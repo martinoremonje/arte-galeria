@@ -32,8 +32,8 @@ function Navbar() {
       </div>
       {/* Sección de información adicional */}
       <div className="bg-gray-100 py-2 text-center text-sm">
-  ¡Encuentra las obras que deseas y a un excelente precio! 
-  <span className="sm:block">family@oremonje.cl  ||  +56 9 44011200 || Envíos a todo Chile.</span>
+  ¡Encuentra las obras que deseas y a un excelente precio! || family@oremonje.cl  ||  +56 9 44011200 || Envíos a todo Chile.
+  
 </div>
     </nav>
   );
