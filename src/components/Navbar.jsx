@@ -40,7 +40,7 @@ function Navbar() {
         backgroundSize: 'cover',
         backgroundPosition: 'center',
       }}
-      className="fixed top-0 left-0 w-full bg-white shadow-md z-50"
+      className="fixed top-0 left-0 w-full bg-white shadow-md z-51"
     >
       <div className="container mx-auto py-4 px-6">
         <div className="flex items-center justify-between">
