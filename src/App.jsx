@@ -9,6 +9,8 @@ import imagen3 from './assets/women.jpeg';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import Footer from './components/Footer';
+import SeccionArte from './components/SectionArt';
+import SeccionResena from './components/SectionReseña';
 
 function App() {
   useEffect(() => {
@@ -30,6 +32,9 @@ function App() {
       
       <Cards />
 
+      <SeccionArte/>
+
+      <SeccionResena/>
     <Footer/>
     </>
   );

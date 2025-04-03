@@ -33,12 +33,7 @@ function Card({ artwork, index }) {
 
 function Cards() {
   return (
-    <div style={{
-      backgroundImage: `url('${backgroundImg}')`,
-      backgroundRepeat: 'no-repeat',
-      backgroundSize: 'cover',
-      backgroundPosition: 'center',
-    }} className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 px-4">
+    <div  className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 px-4">
       {Art.map((artwork, index) => (
         <Card key={artwork.name} artwork={artwork} index={index} />
       ))}

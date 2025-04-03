@@ -38,7 +38,7 @@ const Carousel = ({ images }) => {
   const carouselHeight = `calc(100vh - 7rem)`; // 7rem es equivalente a h-28 (4 * 7 = 28 / 4 = 7 rem)
 
   return (
-    <div  id="default-carousel" className="relative mx-3 " style={{ height: carouselHeight }}>
+    <div  id="default-carousel" className="relative " style={{ height: carouselHeight }}>
 
 
       <div className="absolute top-4 right-0 mr-2 z-50" ref={dropdownRef}>
