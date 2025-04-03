@@ -3,7 +3,7 @@ import { Art } from '../data/Art.js'; // Ajusta la ruta si es necesario
 import backgroundImg from '../assets/background-art.jpg';
 
 function Card({ artwork, index }) {
-  const baseDelay = 500;
+  const baseDelay = 200;
   const incrementalDelay = index * 100; // Ejemplo de incremento de 200ms
 
   return (
