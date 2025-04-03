@@ -40,7 +40,7 @@ function Navbar() {
         backgroundSize: 'cover',
         backgroundPosition: 'center',
       }}
-      className="fixed top-0 left-0 w-full bg-white shadow-md z-51"
+      className="fixed top-0 left-0 w-full bg-white shadow-md z-51 "
     >
       <div className="container mx-auto py-4 px-6">
         <div className="flex items-center justify-between">
@@ -52,10 +52,10 @@ function Navbar() {
 
           {/* Enlaces a la derecha */}
           <div className="flex items-center space-x-4">
-            <button onClick={handleScrollToArte} className="text-gray-700 hover:text-gray-900 focus:outline-none cursor-pointer">
+            <button onClick={handleScrollToArte} className="sm:text-white text-gray-700 hover:text-gray-900 focus:outline-none cursor-pointer ">
               Hablemos de Arte
             </button>
-            <button onClick={handleScrollToResena} className="text-gray-700 hover:text-gray-900 focus:outline-none cursor-pointer">
+            <button onClick={handleScrollToResena} className="sm:text-white text-gray-700 hover:text-gray-900 focus:outline-none cursor-pointer ">
               Reseñas
             </button>
           </div>
