@@ -16,7 +16,7 @@ function Card({ artwork, index }) {
         alt={artwork.name}
         className="w-full h-auto rounded-md mb-2"
       />
-      <h3 className="text-xl font-semibold text-gray-800 mb-1 text-center">{artwork.name}</h3>
+      <h3 className="text-xl font-semibold text-gray-800 mb-1 text-center underline">{artwork.name}</h3>
       <p className="text-gray-600 mb-1 text-right">Precio: ${artwork.price}</p>
       <p className="text-gray-600 text-right">Marco: {artwork.marco ? 'Sí' : 'No'}</p>
     </div>
