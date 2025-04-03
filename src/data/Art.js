@@ -1,7 +1,7 @@
 export const Art = [
     {   name: "AbaAzul",
         price: 30000,
-        marco: false,
+        marco: true,
         img: "/images/AbaAzul.jpeg"
     },
     {   name: "abstractView",
@@ -36,7 +36,7 @@ export const Art = [
     },
     {   name: "Creation",
         price: 30000,
-        marco: false,
+        marco: true,
         img: "/images/Creation.jpeg"
     },
     {   name: "flowers",

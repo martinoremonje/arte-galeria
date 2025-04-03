@@ -1,17 +1,24 @@
 import React from 'react';
 import { Art } from '../data/Art.js'; // Ajusta la ruta si es necesario
 
-function Card({ artwork }) {
+function Card({ artwork, index }) {
+  const baseDelay = 500;
+  const incrementalDelay = index * 200; // Ejemplo de incremento de 200ms
+
   return (
-    <div className="bg-white rounded-lg shadow-md p-4">
+    <div
+      data-aos="fade-up"
+      data-aos-delay={baseDelay + incrementalDelay}
+      className="bg-white rounded-lg shadow-md p-4"
+    >
       <img
         src={artwork.img}
         alt={artwork.name}
         className="w-full h-auto rounded-md mb-2"
       />
-      <h3 className="text-xl font-semibold text-gray-800 mb-1">{artwork.name}</h3>
-      <p className="text-gray-600 mb-1">Precio: ${artwork.price}</p>
-      <p className="text-gray-600">Marco: {artwork.marco ? 'Sí' : 'No'}</p>
+      <h3 className="text-xl font-semibold text-gray-800 mb-1 text-center">{artwork.name}</h3>
+      <p className="text-gray-600 mb-1 text-right">Precio: ${artwork.price}</p>
+      <p className="text-gray-600 text-right">Marco: {artwork.marco ? 'Sí' : 'No'}</p>
     </div>
   );
 }
@@ -19,8 +26,8 @@ function Card({ artwork }) {
 function Cards() {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-      {Art.map((artwork) => (
-        <Card key={artwork.name} artwork={artwork} />
+      {Art.map((artwork, index) => (
+        <Card key={artwork.name} artwork={artwork} index={index} />
       ))}
     </div>
   );
