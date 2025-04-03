@@ -1,5 +1,8 @@
 import React from 'react';
 import { useState, useRef, useEffect } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import '@fortawesome/fontawesome-free/css/all.min.css'; // Asegúrate de tener esto en tu proyecto
 
 const Carousel = ({ images }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -35,10 +38,9 @@ const Carousel = ({ images }) => {
   const carouselHeight = `calc(100vh - 7rem)`; // 7rem es equivalente a h-28 (4 * 7 = 28 / 4 = 7 rem)
 
   return (
-    <div data-aos="fade-up"  id="default-carousel" className="relative mx-3 " style={{ height: carouselHeight }}>
-      
-      
-  
+    <div  id="default-carousel" className="relative mx-3 " style={{ height: carouselHeight }}>
+
+
       <div className="absolute top-4 right-0 mr-2 z-50" ref={dropdownRef}>
         <button
           onClick={toggleDropdown}
@@ -54,7 +56,7 @@ const Carousel = ({ images }) => {
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
           </svg>
         </button>
-        
+
       </div>
 
       <div className="relative h-full overflow-hidden">
@@ -78,25 +80,44 @@ const Carousel = ({ images }) => {
           </div>
         ))}
       </div>
+      {/* Flecha izquierda visual */}
+      <div className="absolute top-4/6 left-4 transform -translate-y-1/2 z-20"> {/* Cambiado a top-2/3 */}
+        <FontAwesomeIcon icon={faChevronLeft} className="text-white text-3xl opacity-70 hover:opacity-40" />
+      </div>
+      {/* Flecha derecha visual */}
+      <div className="absolute top-4/6 right-4 transform -translate-y-1/2 z-20"> {/* Cambiado a top-2/3 */}
+        <FontAwesomeIcon icon={faChevronRight} className="text-white text-3xl opacity-70 hover:opacity-40" />
+      </div>
       <button
         type="button"
         className="absolute top-0 left-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
         onClick={prevSlide}
-      ></button>
+      >
+        <span className="sr-only">Previous</span> {/* Para accesibilidad */}
+      </button>
       <button
         type="button"
         className="absolute top-0 right-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
         onClick={nextSlide}
-      ></button>
+      >
+        <span className="sr-only">Next</span> {/* Para accesibilidad */}
+      </button>
 
       {/* Indicadores de navegación (puntos) */}
       <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-50 flex space-x-3">
-        <div className="w-3 h-3 rounded-full bg-white"></div>
-        <div className="w-3 h-3 rounded-full bg-white"></div>
-        <div className="w-3 h-3 rounded-full bg-white"></div>
+        {images.map((_, index) => (
+          <button
+            key={index}
+            type="button"
+            className={`w-3 h-3 rounded-full ${currentIndex === index ? 'bg-white' : 'bg-gray-300 hover:bg-white'}`}
+            aria-current={currentIndex === index}
+            aria-label={`Slide ${index + 1}`}
+            onClick={() => setCurrentIndex(index)}
+          ></button>
+        ))}
       </div>
 
-     
+
     </div>
   );
 };
