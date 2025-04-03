@@ -1,5 +1,6 @@
 import React from 'react';
 import { Art } from '../data/Art.js'; // Ajusta la ruta si es necesario
+import backgroundImg from '../assets/background-art.jpg'
 
 function Card({ artwork, index }) {
   const baseDelay = 500;
@@ -7,9 +8,11 @@ function Card({ artwork, index }) {
 
   return (
     <div
+    
       data-aos="fade-up"
       data-aos-delay={baseDelay + incrementalDelay}
-      className="bg-white rounded-lg shadow-md p-4"
+      className="bg-white rounded-lg shadow-md p-4 mt-3"
+
     >
       <img
         src={artwork.img}
@@ -25,7 +28,12 @@ function Card({ artwork, index }) {
 
 function Cards() {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+    <div style={{
+      backgroundImage: `url('${backgroundImg}')`,
+      backgroundRepeat: 'no-repeat',
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+    }} className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
       {Art.map((artwork, index) => (
         <Card key={artwork.name} artwork={artwork} index={index} />
       ))}
