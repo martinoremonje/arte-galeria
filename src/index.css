@@ -11,6 +11,13 @@ body {
   background-size: cover;
   background-position: center;
   width: 100vw; 
+  
+    overflow-x: hidden;
+  
+  
+  #root{/*en caso de usar react*/
+   overflow-x: hidden;
+  }
   }
 
   .card-container {
