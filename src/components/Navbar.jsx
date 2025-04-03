@@ -52,10 +52,10 @@ function Navbar() {
 
           {/* Enlaces a la derecha */}
           <div className="flex items-center space-x-4">
-            <button onClick={handleScrollToArte} className="sm:text-white text-gray-700 hover:text-gray-900 focus:outline-none cursor-pointer ">
+            <button onClick={handleScrollToArte} className="sm:text-gray-700 text-white hover:text-gray-900 focus:outline-none cursor-pointer ">
               Hablemos de Arte
             </button>
-            <button onClick={handleScrollToResena} className="sm:text-white text-gray-700 hover:text-gray-900 focus:outline-none cursor-pointer ">
+            <button onClick={handleScrollToResena} className="sm:text-gray-700 text-white hover:text-gray-900 focus:outline-none cursor-pointer ">
               Reseñas
             </button>
           </div>
