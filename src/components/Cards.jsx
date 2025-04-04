@@ -65,14 +65,14 @@ function Card({ artwork, index, totalArtworks }) {
         <div
           id={`modal-${artwork.name.replace(/\s+/g, '-')}`}
           tabIndex="-1"
-          className="fixed top-0 left-0 right-0 z-50 w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full bg-opacity-50 flex justify-center items-center"
+          className="fixed top-0 left-0 right-0  w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full bg-opacity-50 flex justify-center items-center z-80"
         >
           <div
             data-aos="fade-up"
             className={`relative w-full max-w-sm md:max-w-2xl max-h-full ${isSmallScreen ? 'mt-35' : 'mt-25'}`} // max-w-sm para móviles, md:max-w-2xl para pantallas medianas y grandes, mt-35 condicional
           >
             {/* Modal content */}
-            <div className="relative bg-gray-100 rounded-lg shadow dark:bg-gray-700 z-52">
+            <div className="relative bg-gray-100 rounded-lg shadow dark:bg-gray-700 ">
               {/* Modal header */}
               <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
                 <div className='flex-grow text-center uppercase'>
