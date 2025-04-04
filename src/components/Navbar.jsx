@@ -61,8 +61,8 @@ function Navbar() {
           </div>
         </div>
       </div>
-      {/* Sección de información adicional */}
-      <div className="bg-gray-100 py-2 text-center text-sm">
+      {/* Sección de información adicional - Ocultar en dispositivos pequeños */}
+      <div className="bg-gray-100 py-2 text-center text-sm hidden sm:block">
         ¡Encuentra las obras que deseas y a un excelente precio! || family@oremonje.cl || +56 9 44011200 || Envíos a todo Chile.
       </div>
     </nav>
