@@ -85,7 +85,7 @@ const Carousel = ({ images }) => {
         <FontAwesomeIcon icon={faChevronLeft} className="text-white text-3xl opacity-70 hover:opacity-40" />
       </div>
       {/* Flecha derecha visual */}
-      <div className="absolute top-4/6 right-4 transform -translate-y-1/2 z-20"> {/* Cambiado a top-2/3 */}
+      <div className="absolute top-4/6 right-8 transform -translate-y-1/2 z-20"> {/* Cambiado a top-2/3 */}
         <FontAwesomeIcon icon={faChevronRight} className="text-white text-3xl opacity-70 hover:opacity-40" />
       </div>
       <button
