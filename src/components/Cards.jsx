@@ -54,10 +54,7 @@ function Card({ artwork, index, totalArtworks }) {
           </div>
         </div>
         <h3 className="text-xl font-semibold text-gray-800 mb-1 text-center underline">{artwork.name}</h3>
-        <div className='mr-2'>
-          <p className="text-gray-600 mb-1 text-right">Precio: ${artwork.price}</p>
-          <p className="text-gray-600 text-right">Marco: {artwork.marco ? 'Sí' : 'No'}</p>
-        </div>
+       
       </div>
 
       {/* Modal de Flowbite - Responsive más pequeño en celulares */}
