@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Art } from '../data/Art.js';
 
 function Card({ artwork, index }) {
@@ -13,6 +13,24 @@ function Card({ artwork, index }) {
   const closeModal = () => {
     setIsOpen(false);
   };
+
+  // Estado para verificar si la pantalla es pequeña
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsSmallScreen(window.innerWidth < 768); // Define el ancho para considerar pantalla pequeña (ej: 768px)
+    };
+
+    // Llama a la función al montar el componente
+    handleResize();
+
+    // Agrega un listener para el evento resize
+    window.addEventListener('resize', handleResize);
+
+    // Limpia el listener al desmontar el componente
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   return (
     <>
@@ -48,7 +66,7 @@ function Card({ artwork, index }) {
         >
           <div
             data-aos="fade-up"
-            className="relative w-full max-w-sm md:max-w-2xl max-h-full mt-25" // max-w-sm para móviles, md:max-w-2xl para pantallas medianas y grandes
+            className={`relative w-full max-w-sm md:max-w-2xl max-h-full ${isSmallScreen ? 'mt-35' : 'mt-25'}`} // max-w-sm para móviles, md:max-w-2xl para pantallas medianas y grandes, mt-35 condicional
           >
             {/* Modal content */}
             <div className="relative bg-gray-100 rounded-lg shadow dark:bg-gray-700">
