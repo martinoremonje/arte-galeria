@@ -11,6 +11,7 @@ import 'aos/dist/aos.css';
 import Footer from './components/Footer';
 import SeccionArte from './components/SectionArt';
 import SeccionResena from './components/SectionReseña';
+import TituloObras from './components/TituloObras';
 
 function App() {
   useEffect(() => {
@@ -28,8 +29,8 @@ function App() {
       <Navbar />
   
       <Carousel images={images}/>
- 
       
+      <TituloObras/>
       <Cards />
 
       <SeccionArte/>
