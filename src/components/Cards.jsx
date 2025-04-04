@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Art } from '../data/Art.js';
 
-function Card({ artwork, index }) {
+function Card({ artwork, index, totalArtworks }) {
   const [isOpen, setIsOpen] = useState(false);
   const baseDelay = 200;
-  const incrementalDelay = index * 100;
+
+  // Calcular el delay de forma que las últimas cartas tengan un delay menor
+  const normalizedIndex = totalArtworks - 1 - index; // Invertir el índice
+  const incrementalDelay = normalizedIndex * 50; // Reducir el factor de incremento
 
   const openModal = () => {
     setIsOpen(true);
@@ -69,7 +72,7 @@ function Card({ artwork, index }) {
             className={`relative w-full max-w-sm md:max-w-2xl max-h-full ${isSmallScreen ? 'mt-35' : 'mt-25'}`} // max-w-sm para móviles, md:max-w-2xl para pantallas medianas y grandes, mt-35 condicional
           >
             {/* Modal content */}
-            <div className="relative bg-gray-100 rounded-lg shadow dark:bg-gray-700">
+            <div className="relative bg-gray-100 rounded-lg shadow dark:bg-gray-700 z-52">
               {/* Modal header */}
               <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
                 <div className='flex-grow text-center uppercase'>
@@ -124,7 +127,7 @@ function Cards() {
   return (
     <div  className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 px-4">
       {Art.map((artwork, index) => (
-        <Card key={artwork.name} artwork={artwork} index={index} />
+        <Card key={artwork.name} artwork={artwork} index={index} totalArtworks={Art.length} />
       ))}
     </div>
   );
