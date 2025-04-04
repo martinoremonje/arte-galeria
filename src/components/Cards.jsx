@@ -39,23 +39,25 @@ function Card({ artwork, index }) {
         </div>
       </div>
 
-      {/* Modal de Flowbite */}
+      {/* Modal de Flowbite - Responsive más pequeño en celulares */}
       {isOpen && (
         <div
           id={`modal-${artwork.name.replace(/\s+/g, '-')}`}
           tabIndex="-1"
-          className="fixed top-0 left-0 right-0 z-50 w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full  bg-opacity-50 flex justify-center items-center"
+          className="fixed top-0 left-0 right-0 z-50 w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full bg-opacity-50 flex justify-center items-center"
         >
-          <div data-aos="fade-up" className="relative w-full max-w-2xl max-h-full mt-25"> {/* Agregamos mt-16 (margin-top: 4rem) */}
+          <div
+            data-aos="fade-up"
+            className="relative w-full max-w-sm md:max-w-2xl max-h-full mt-25" // max-w-sm para móviles, md:max-w-2xl para pantallas medianas y grandes
+          >
             {/* Modal content */}
             <div className="relative bg-gray-100 rounded-lg shadow dark:bg-gray-700">
               {/* Modal header */}
               <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-                <div className='flex-grow text-center uppercase'> 
-
-                <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
-                  {artwork.name}
-                </h3>
+                <div className='flex-grow text-center uppercase'>
+                  <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
+                    {artwork.name}
+                  </h3>
                 </div>
                 <button
                   type="button"
@@ -69,11 +71,11 @@ function Card({ artwork, index }) {
                 </button>
               </div>
               {/* Modal body */}
-              <div className="p-4 md:p-5 grid grid-cols-1 md:grid-cols-2 gap-4"> {/* Usamos grid para organizar imagen e info */}
+              <div className="p-4 md:p-5 grid grid-cols-1 md:grid-cols-2 gap-4"> {/* Volvemos a dos columnas en pantallas medianas y grandes */}
                 <img
                   src={artwork.img}
                   alt={artwork.name}
-                  className="w-full h-auto rounded-md mb-2 md:mb-0" // Ajustamos el margen inferior para pantallas más grandes
+                  className="w-full h-auto rounded-md mb-2 md:mb-0"
                 />
                 <div>
                   <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400 mb-2">
