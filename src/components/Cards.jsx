@@ -12,21 +12,39 @@ function Card({ artwork, index, totalArtworks }) {
 
   const openModal = () => {
     setIsOpen(true);
+    // Agregar un estado al historial para poder interceptar el retroceso
+    window.history.pushState({ modalOpen: true, artworkName: artwork.name }, null, window.location.pathname);
   };
 
-  const closeModal = () => {
+   const closeModal = () => {
     setIsOpen(false);
+    // Reemplazar el estado actual con uno donde el modal está cerrado
+    window.history.replaceState({ modalOpen: false }, null, window.location.pathname);
   };
+
+  // Manejar el evento de retroceso del navegador
+  useEffect(() => {
+    const handlePopstate = (event) => {
+      if (event.state && event.state.modalOpen && event.state.artworkName === artwork.name && isOpen) {
+        setIsOpen(false);
+      }
+    };
+
+    window.addEventListener('popstate', handlePopstate);
+
+    return () => {
+      window.removeEventListener('popstate', handlePopstate);
+    };
+  }, [isOpen, artwork.name]);
 
   // Estado para verificar si la pantalla es pequeña
   const [isSmallScreen, setIsSmallScreen] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
-      setIsSmallScreen(window.innerWidth < 768); 
+      setIsSmallScreen(window.innerWidth < 768);
     };
 
-    
     handleResize();
 
     // Agrega un listener para el evento resize
@@ -47,7 +65,7 @@ function Card({ artwork, index, totalArtworks }) {
           backgroundPosition: 'center',
         }}
         className="card-container bg-gray-200 rounded-lg shadow-md p-1 mt-3 cursor-pointer card-transition" // Agregamos cursor-pointer
-        onClick={openModal}  
+        onClick={openModal}
       >
         <div className="image-container relative">
           <img
@@ -60,7 +78,7 @@ function Card({ artwork, index, totalArtworks }) {
           </div>
         </div>
         <h3 className="text-xl font-semibold text-white mb-1 text-center ">{artwork.name}</h3>
-       
+
       </div>
 
       {/* Modal de Flowbite - Responsive más pequeño en celulares */}
@@ -76,11 +94,11 @@ function Card({ artwork, index, totalArtworks }) {
           >
             {/* Modal content */}
             <div style={{
-                    backgroundImage: `url('${backgroundImg}')`,
-                    backgroundRepeat: 'no-repeat',
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center',
-                  }} className="relative bg-gray-100 rounded-lg shadow dark:bg-gray-700 ">
+                  backgroundImage: `url('${backgroundImg}')`,
+                  backgroundRepeat: 'no-repeat',
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
+                }} className="relative bg-gray-100 rounded-lg shadow dark:bg-gray-700 ">
               {/* Modal header */}
               <div className="flex items-center justify-between md:p-5 border-b rounded-t dark:border-gray-600">
                 <div className='flex-grow text-center uppercase'>
@@ -104,11 +122,11 @@ function Card({ artwork, index, totalArtworks }) {
                 <img
                   src={artwork.img}
                   alt={artwork.name}
-                  className="w-full h-auto rounded-md mb-2 md:mb-0 pb-2" 
+                  className="w-full h-auto rounded-md mb-2 md:mb-0 pb-2"
                 />
                 <div>
                   <p className="border bg-gray-200 text-base leading-relaxed text-gray-500 dark:text-gray-400 mb-2">
-                    Precio: <span className='font-bold text-black'> ${artwork.price}</span> 
+                    Precio: <span className='font-bold text-black'> ${artwork.price}</span>
                   </p>
                   <p className="border bg-gray-200 text-base leading-relaxed text-gray-500 dark:text-gray-400 mb-2">
                     Marco: {artwork.marco ? 'Sí' : 'No'}
