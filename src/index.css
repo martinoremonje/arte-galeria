@@ -53,3 +53,14 @@ body {
     transition: opacity 0.3s ease;
     background-color: transparent; /* Inicialmente transparente */
   }
+
+.card-transition{
+  height:63vh;
+  overflow: hidden;
+  transition: height .5s;
+  interpolate-size: allow-keywords;
+}
+
+.card-transition:hover{
+  height: auto;
+}

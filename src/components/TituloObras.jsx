@@ -18,7 +18,7 @@ const TituloObras = () => {
               backgroundPosition: 'center',
             }}  className='text-center cointeiner h-22  font-light w-full bg-gray-900'>
 
-        <h2 className=' text-3xl pt-3 '>Obras de Arte </h2>
+        <h2 className=' text-3xl pt-3 font-extrabold'>Obras de Arte </h2>
         <p>Cantidad de obras disponibles: <span className='text-green-700'>{Art.length}</span></p>
       </div>
       </>

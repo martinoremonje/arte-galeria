@@ -23,10 +23,10 @@ function Card({ artwork, index, totalArtworks }) {
 
   useEffect(() => {
     const handleResize = () => {
-      setIsSmallScreen(window.innerWidth < 768); // Define el ancho para considerar pantalla pequeña (ej: 768px)
+      setIsSmallScreen(window.innerWidth < 768); 
     };
 
-    // Llama a la función al montar el componente
+    
     handleResize();
 
     // Agrega un listener para el evento resize
@@ -40,14 +40,13 @@ function Card({ artwork, index, totalArtworks }) {
     <>
       <div
         data-aos="fade-up"
-        data-aos-delay={baseDelay + incrementalDelay}
         style={{
           backgroundImage: `url('${backgroundImg}')`,
           backgroundRepeat: 'no-repeat',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}
-        className="card-container bg-gray-200 rounded-lg shadow-md p-1 mt-3 cursor-pointer" // Agregamos cursor-pointer
+        className="card-container bg-gray-200 rounded-lg shadow-md p-1 mt-3 cursor-pointer card-transition" // Agregamos cursor-pointer
         onClick={openModal}  
       >
         <div className="image-container relative">
@@ -83,7 +82,7 @@ function Card({ artwork, index, totalArtworks }) {
                     backgroundPosition: 'center',
                   }} className="relative bg-gray-100 rounded-lg shadow dark:bg-gray-700 ">
               {/* Modal header */}
-              <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+              <div className="flex items-center justify-between md:p-5 border-b rounded-t dark:border-gray-600">
                 <div className='flex-grow text-center uppercase'>
                   <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
                     {artwork.name}
@@ -91,7 +90,7 @@ function Card({ artwork, index, totalArtworks }) {
                 </div>
                 <button
                   type="button"
-                  className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                  className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-full text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
                   onClick={closeModal}
                 >
                   <svg className="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
@@ -105,16 +104,16 @@ function Card({ artwork, index, totalArtworks }) {
                 <img
                   src={artwork.img}
                   alt={artwork.name}
-                  className="w-full h-auto rounded-md mb-2 md:mb-0"
+                  className="w-full h-auto rounded-md mb-2 md:mb-0 pb-2" 
                 />
                 <div>
-                  <p className="border bg-white text-base leading-relaxed text-gray-500 dark:text-gray-400 mb-2">
+                  <p className="border bg-gray-200 text-base leading-relaxed text-gray-500 dark:text-gray-400 mb-2">
                     Precio: <span className='font-bold text-black'> ${artwork.price}</span> 
                   </p>
-                  <p className="border bg-white text-base leading-relaxed text-gray-500 dark:text-gray-400 mb-2">
+                  <p className="border bg-gray-200 text-base leading-relaxed text-gray-500 dark:text-gray-400 mb-2">
                     Marco: {artwork.marco ? 'Sí' : 'No'}
                   </p>
-                  <p className="border bg-white text-base font-semibold text-green-500 dark:text-green-400 mb-2">
+                  <p className="border bg-gray-200 text-base font-semibold text-green-500 dark:text-green-400 mb-2">
                     Disponible
                   </p>
                   {artwork.description && (
