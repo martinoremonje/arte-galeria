@@ -1,6 +1,7 @@
 import React from 'react';
 import logo from '../assets/logoArtGallery.png';
-import backgroundImg from '../assets/artBannernavbar.png';
+import backgroundImg from '../assets/lightsArt.png';
+import backgroundImg2 from '../assets/woodArt.png'
 
 function Navbar() {
   const scrollToSection = (id) => {
@@ -52,17 +53,22 @@ function Navbar() {
 
           {/* Enlaces a la derecha */}
           <div className="flex items-center space-x-4">
-            <button onClick={handleScrollToArte} className="sm:text-gray-700 text-gray-300 hover:text-gray-900 focus:outline-none cursor-pointer ">
+            <button onClick={handleScrollToArte} className="sm:text-white text-gray-300 hover:text-gray-900 focus:outline-none cursor-pointer ">
               Hablemos de Arte
             </button>
-            <button onClick={handleScrollToResena} className="sm:text-gray-700 text-gray-300 hover:text-gray-900 focus:outline-none cursor-pointer ">
+            <button onClick={handleScrollToResena} className="sm:text-white text-gray-300 hover:text-gray-900 focus:outline-none cursor-pointer ">
               Reseñas
             </button>
           </div>
         </div>
       </div>
       {/* Sección de información adicional - Ocultar en dispositivos pequeños */}
-      <div className="bg-gray-100 py-2 text-center text-sm ">
+      <div style={{
+        backgroundImage: `url('${backgroundImg2}')`,
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+      }} className="bg-gray-100 py-2 text-center text-sm text-gray-100">
         ¡Encuentra las obras que deseas y a un excelente precio! || family@oremonje.cl || +56 9 44011200 || Envíos a todo Chile.
       </div>
     </nav>
