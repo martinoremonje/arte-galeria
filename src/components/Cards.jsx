@@ -23,7 +23,8 @@ function Card({ artwork, index, totalArtworks }) {
   // Manejar el evento de retroceso del navegador
   useEffect(() => {
     const handlePopstate = (event) => {
-      if (event.state && event.state.modalOpen && isOpen) {
+      // Si el estado del historial NO tiene modalOpen, cerramos el modal
+      if (!event.state?.modalOpen && isOpen) {
         setIsOpen(false);
       }
     };
@@ -33,7 +34,7 @@ function Card({ artwork, index, totalArtworks }) {
     return () => {
       window.removeEventListener('popstate', handlePopstate);
     };
-  }, [isOpen, artwork.name]);
+  }, [isOpen]); // Dependencia en isOpen sigue siendo importante
 
   // Estado para verificar si la pantalla es pequeña
   const [isSmallScreen, setIsSmallScreen] = useState(false);
