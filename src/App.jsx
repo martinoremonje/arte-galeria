@@ -2,7 +2,7 @@ import  { useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Carousel from './components/Carousel'; // Asegúrate de que la ruta sea correcta
 import Cards from './components/Cards';
-import imagen1 from './assets/SeaSky.jpeg';
+import imagen1 from './assets/Creation.jpeg';
 import imagen2 from './assets/Town1.jpeg';
 import imagen3 from './assets/women.jpeg';
 
