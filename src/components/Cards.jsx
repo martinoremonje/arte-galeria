@@ -16,16 +16,14 @@ function Card({ artwork, index, totalArtworks }) {
     window.history.pushState({ modalOpen: true, artworkName: artwork.name }, null, window.location.pathname);
   };
 
-   const closeModal = () => {
+  const closeModal = () => {
     setIsOpen(false);
-    // Reemplazar el estado actual con uno donde el modal está cerrado
-    window.history.replaceState({ modalOpen: false }, null, window.location.pathname);
   };
 
   // Manejar el evento de retroceso del navegador
   useEffect(() => {
     const handlePopstate = (event) => {
-      if (event.state && event.state.modalOpen && event.state.artworkName === artwork.name && isOpen) {
+      if (event.state && event.state.modalOpen && isOpen) {
         setIsOpen(false);
       }
     };
@@ -94,11 +92,11 @@ function Card({ artwork, index, totalArtworks }) {
           >
             {/* Modal content */}
             <div style={{
-                  backgroundImage: `url('${backgroundImg}')`,
-                  backgroundRepeat: 'no-repeat',
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center',
-                }} className="relative bg-gray-100 rounded-lg shadow dark:bg-gray-700 ">
+                backgroundImage: `url('${backgroundImg}')`,
+                backgroundRepeat: 'no-repeat',
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+              }} className="relative bg-gray-100 rounded-lg shadow dark:bg-gray-700 ">
               {/* Modal header */}
               <div className="flex items-center justify-between md:p-5 border-b rounded-t dark:border-gray-600">
                 <div className='flex-grow text-center uppercase'>
