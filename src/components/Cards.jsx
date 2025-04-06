@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Art } from '../data/Art.js';
+import backgroundImg from '../assets/woodArt.png'
 
 function Card({ artwork, index, totalArtworks }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -40,8 +41,14 @@ function Card({ artwork, index, totalArtworks }) {
       <div
         data-aos="fade-up"
         data-aos-delay={baseDelay + incrementalDelay}
+        style={{
+          backgroundImage: `url('${backgroundImg}')`,
+          backgroundRepeat: 'no-repeat',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+        }}
         className="card-container bg-gray-200 rounded-lg shadow-md p-1 mt-3 cursor-pointer" // Agregamos cursor-pointer
-        onClick={openModal} // Abrir modal al hacer clic
+        onClick={openModal}  
       >
         <div className="image-container relative">
           <img
@@ -53,7 +60,7 @@ function Card({ artwork, index, totalArtworks }) {
             Ver más
           </div>
         </div>
-        <h3 className="text-xl font-semibold text-gray-800 mb-1 text-center underline">{artwork.name}</h3>
+        <h3 className="text-xl font-semibold text-white mb-1 text-center ">{artwork.name}</h3>
        
       </div>
 
@@ -69,7 +76,12 @@ function Card({ artwork, index, totalArtworks }) {
             className={`relative w-full max-w-sm md:max-w-2xl max-h-full ${isSmallScreen ? 'mt-35' : 'mt-25'}`} // max-w-sm para móviles, md:max-w-2xl para pantallas medianas y grandes, mt-35 condicional
           >
             {/* Modal content */}
-            <div className="relative bg-gray-100 rounded-lg shadow dark:bg-gray-700 ">
+            <div style={{
+                    backgroundImage: `url('${backgroundImg}')`,
+                    backgroundRepeat: 'no-repeat',
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                  }} className="relative bg-gray-100 rounded-lg shadow dark:bg-gray-700 ">
               {/* Modal header */}
               <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
                 <div className='flex-grow text-center uppercase'>
@@ -96,13 +108,13 @@ function Card({ artwork, index, totalArtworks }) {
                   className="w-full h-auto rounded-md mb-2 md:mb-0"
                 />
                 <div>
-                  <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400 mb-2">
-                    Precio: ${artwork.price}
+                  <p className="border bg-white text-base leading-relaxed text-gray-500 dark:text-gray-400 mb-2">
+                    Precio: <span className='font-bold text-black'> ${artwork.price}</span> 
                   </p>
-                  <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400 mb-2">
+                  <p className="border bg-white text-base leading-relaxed text-gray-500 dark:text-gray-400 mb-2">
                     Marco: {artwork.marco ? 'Sí' : 'No'}
                   </p>
-                  <p className="text-base font-semibold text-green-500 dark:text-green-400 mb-2">
+                  <p className="border bg-white text-base font-semibold text-green-500 dark:text-green-400 mb-2">
                     Disponible
                   </p>
                   {artwork.description && (
