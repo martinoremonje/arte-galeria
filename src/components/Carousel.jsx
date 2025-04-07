@@ -1,21 +1,61 @@
-import React from 'react';
-import { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useReducer } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
-import '@fortawesome/fontawesome-free/css/all.min.css'; // Asegúrate de tener esto en tu proyecto
+import '@fortawesome/fontawesome-free/css/all.min.css';
+import { useSwipeable } from 'react-swipeable';
+
+// Definiciones de constantes (similar al ejemplo que encontraste)
+const PREV = 'PREV';
+const NEXT = 'NEXT';
+
+const getOrder = (index, pos, numItems) => {
+  return index - pos < 0 ? numItems - Math.abs(index - pos) : index - pos;
+};
+
+const getInitialState = (numItems) => ({ pos: 0, sliding: false, dir: NEXT }); // Cambiado pos inicial a 0
+
+function reducer(state, action) {
+  switch (action.type) {
+    case PREV:
+      return {
+        ...state,
+        dir: PREV,
+        sliding: true,
+        pos: state.pos === 0 ? action.numItems - 1 : state.pos - 1
+      };
+    case NEXT:
+      return {
+        ...state,
+        dir: NEXT,
+        sliding: true,
+        pos: state.pos === action.numItems - 1 ? 0 : state.pos + 1
+      };
+    case 'stopSliding':
+      return { ...state, sliding: false };
+    default:
+      return state;
+  }
+}
 
 const Carousel = ({ images }) => {
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const numItems = images.length;
+  const [state, dispatch] = useReducer(reducer, getInitialState(numItems));
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
 
-  const nextSlide = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
+  const slide = (dir) => {
+    dispatch({ type: dir, numItems });
+    // No necesitamos el timeout para detener el sliding inmediatamente
+    // ya que la transición CSS se encargará de la animación.
   };
 
-  const prevSlide = () => {
-    setCurrentIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
-  };
+  const handlers = useSwipeable({
+    onSwipedLeft: () => slide(NEXT),
+    onSwipedRight: () => slide(PREV),
+    swipeDuration: 500,
+    preventScrollOnSwipe: true,
+    trackMouse: true
+  });
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -35,12 +75,10 @@ const Carousel = ({ images }) => {
   }, []);
 
   // Calcular la altura del carrusel
-  const carouselHeight = `calc(100vh - 7rem)`; // 7rem es equivalente a h-28 (4 * 7 = 28 / 4 = 7 rem)
+  const carouselHeight = `calc(100vh - 7rem)`;
 
   return (
-    <div  id="default-carousel" className="relative " style={{ height: carouselHeight }}>
-
-
+    <div id="default-carousel" className="relative " style={{ height: carouselHeight }} {...handlers}>
       <div className="absolute top-4 right-0 mr-2 z-50" ref={dropdownRef}>
         <button
           onClick={toggleDropdown}
@@ -56,7 +94,6 @@ const Carousel = ({ images }) => {
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
           </svg>
         </button>
-
       </div>
 
       <div className="relative h-full overflow-hidden">
@@ -64,12 +101,22 @@ const Carousel = ({ images }) => {
           <div
             key={index}
             className={`duration-700 ease-in-out absolute w-full h-full transition-transform ${
-              index === currentIndex
-                ? 'translate-x-0'
-                : index < currentIndex
-                ? '-translate-x-full'
-                : 'translate-x-full'
+              getOrder(index, state.pos, numItems) === 0
+                ? 'translate-x-0 z-10'
+                : getOrder(index, state.pos, numItems) === 1
+                ? 'translate-x-full z-0'
+                : getOrder(index, state.pos, numItems) === numItems - 1
+                ? '-translate-x-full z-0'
+                : 'translate-x-full z-0' // Ocultar otros elementos
             }`}
+            style={{
+              // Estilos basados en el estado para la animación (puedes ajustarlos)
+              transform: state.sliding
+                ? `translateX(${state.dir === NEXT ? '-100%' : '100%'})`
+                : 'translateX(0%)',
+              transition: state.sliding ? 'transform 0.5s ease-in-out' : 'none',
+              order: getOrder(index, state.pos, numItems), // Usar order para el layout
+            }}
             data-carousel-item={index}
           >
             <img
@@ -80,27 +127,36 @@ const Carousel = ({ images }) => {
           </div>
         ))}
       </div>
-      {/* Flecha izquierda visual */}
-      <div className="absolute top-4/6 left-4 transform -translate-y-1/2 z-20"> {/* Cambiado a top-2/3 */}
-        <FontAwesomeIcon icon={faChevronLeft} className="text-white text-3xl opacity-70 hover:opacity-40" />
+
+      {/* Flechas de navegación */}
+      <div className="absolute top-4/6 left-4 transform -translate-y-1/2 z-20">
+        <FontAwesomeIcon
+          icon={faChevronLeft}
+          className="text-white text-3xl opacity-70 hover:opacity-40 cursor-pointer"
+          onClick={() => slide(PREV)}
+        />
       </div>
-      {/* Flecha derecha visual */}
-      <div className="absolute top-4/6 right-7 transform -translate-y-1/2 z-20"> {/* Cambiado a top-2/3 */}
-        <FontAwesomeIcon icon={faChevronRight} className="text-white text-3xl opacity-70 hover:opacity-40" />
+      <div className="absolute top-4/6 right-7 transform -translate-y-1/2 z-20">
+        <FontAwesomeIcon
+          icon={faChevronRight}
+          className="text-white text-3xl opacity-70 hover:opacity-40 cursor-pointer"
+          onClick={() => slide(NEXT)}
+        />
       </div>
+      {/* Botones invisibles para accesibilidad (mantener) */}
       <button
         type="button"
         className="absolute top-0 left-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
-        onClick={prevSlide}
+        onClick={() => slide(PREV)}
       >
-        <span className="sr-only">Previous</span> {/* Para accesibilidad */}
+        <span className="sr-only">Previous</span>
       </button>
       <button
         type="button"
         className="absolute top-0 right-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
-        onClick={nextSlide}
+        onClick={() => slide(NEXT)}
       >
-        <span className="sr-only">Next</span> {/* Para accesibilidad */}
+        <span className="sr-only">Next</span>
       </button>
 
       {/* Indicadores de navegación (puntos) */}
@@ -109,15 +165,13 @@ const Carousel = ({ images }) => {
           <button
             key={index}
             type="button"
-            className={`w-3 h-3 rounded-full ${currentIndex === index ? 'bg-white' : 'bg-gray-300 hover:bg-white'}`}
-            aria-current={currentIndex === index}
+            className={`w-3 h-3 rounded-full ${state.pos === index ? 'bg-white' : 'bg-gray-300 hover:bg-white'}`}
+            aria-current={state.pos === index}
             aria-label={`Slide ${index + 1}`}
-            onClick={() => setCurrentIndex(index)}
+            onClick={() => dispatch({ type: NEXT, numItems: numItems, pos: index })} // Ajustar el dispatch para ir directamente al índice
           ></button>
         ))}
       </div>
-
-
     </div>
   );
 };
